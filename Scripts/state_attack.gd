@@ -19,7 +19,7 @@ func Enter() -> void:
 	player.UpdateAnimation("attack")
 	animation_player.play("attack_side")
 	animation_player.animation_finished.connect(EndAttack)
-	
+	$FX.play()
 	#audio.stream = attack_sound
 	#audio.pitch_scale = randf_range(0.9 , 1.1)
 	#audio.play()

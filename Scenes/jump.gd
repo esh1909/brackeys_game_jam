@@ -2,12 +2,14 @@ class_name State_Jump extends State
 
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
+@onready var range_attack: State = $"../Range_Attack"
 
 
 #What happens when player enters this state
 func Enter() -> void:
 	player.UpdateAnimation("idle")
 	player.velocity += Vector2.UP * 100
+	$FX.play()
 	pass
 	
 	
@@ -31,4 +33,6 @@ func Physics(delta : float) -> State:
 
 #what happens with input events during this state
 func HandleInput(_event : InputEvent) -> State:
+	if _event.is_action_pressed("range_attack"):
+		return range_attack
 	return null

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0amvwunyu65k"]
+
+[ext_resource type="Texture2D" uid="uid://36pw0r3y2rt4" path="res://Assets/chakra/chakra.png" id="1_8q1bf"]
+[ext_resource type="Script" path="res://Scenes/chakra.gd" id="1_jvjc2"]
+[ext_resource type="Script" path="res://Scripts/hurt_box.gd" id="3_qf3pa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20al4"]
+radius = 3.0
+height = 12.0
+
+[node name="Chakra" type="Node2D"]
+script = ExtResource("1_jvjc2")
+
+[node name="Chakra" type="Sprite2D" parent="."]
+texture = ExtResource("1_8q1bf")
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("3_qf3pa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_20al4")

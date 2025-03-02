@@ -16,6 +16,8 @@ func _process(delta: float) -> void:
 func TakeDamage(damage : int) -> void:
 	print("TakeDamage " ,damage)
 	#Damaged.emit(damage)
-	get_parent().queue_free()
-	#print(get_parent(), "hitbox parent")
-	
+	if get_parent().has_method("die"):
+		get_parent().die()
+	else:
+		get_parent().queue_free()
+		

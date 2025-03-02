@@ -12,6 +12,7 @@ var can_move = true
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var state_machine: PlayerStateMachine = $StateMachine
+@onready var audio_player = $FX
 
 signal DirectionChanged(new_direction: Vector2)
 
@@ -33,7 +34,9 @@ func _process(delta):
 		direction = Vector2.ZERO
 		velocity.x = 0
 	
-
+func get_audio_player() -> AudioStreamPlayer2D:
+	return audio_player
+	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y -= jump_force

@@ -1,12 +1,12 @@
 extends Node2D
 
-@export var amount_of_cows = 3
-@export var amount_of_butter = 3
-@export var amount_of_ufos = 2
-@export var amount_of_snakes = 3
+@export var amount_of_cows = 10
+@export var amount_of_butter = 10
+@export var amount_of_ufos = 10
+@export var amount_of_snakes = 10
 
-const SPAWN_MIN_X = -10
-const SPAWN_MAX_X = 10
+const SPAWN_MIN_X = -20
+const SPAWN_MAX_X = 20
 const MIN_DISTANCE = 25
 
 var positions: Array[int]
@@ -29,6 +29,10 @@ func _ready() -> void:
 	
 	for i in range(amount_of_snakes):
 		create_snakes(positions.pop_back())
+		
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
 
 func create_cow(x_pos):
 	#create the cow

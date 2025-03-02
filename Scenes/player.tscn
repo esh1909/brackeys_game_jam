@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dteeaorlt0ipr"]
+[gd_scene load_steps=33 format=3 uid="uid://dteeaorlt0ipr"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0h7qc"]
 [ext_resource type="Texture2D" uid="uid://8jrcawb43fqs" path="res://Assets/krish_idle/Krishna_Idle-1.png" id="2_0s5r7"]
@@ -20,7 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://dmeplaf1vmu81" path="res://Assets/krish_walk/Krishna_Walk-5.png" id="12_bk8jc"]
 [ext_resource type="Texture2D" uid="uid://cbp8ovoi8b37" path="res://Assets/krish_walk/Krishna_Walk-6.png" id="13_qiws5"]
 [ext_resource type="Texture2D" uid="uid://xvqjnlk7a7fv" path="res://Assets/krish_walk/Krishna_Walk-7.png" id="14_k0po3"]
+[ext_resource type="AudioStream" uid="uid://qiqtnpdlp1lv" path="res://Assets/Sounds/hitHurt.wav" id="19_146d6"]
 [ext_resource type="Script" path="res://Scenes/jump.gd" id="19_m6q5m"]
+[ext_resource type="Script" path="res://Scenes/range_attack.gd" id="20_mig2v"]
+[ext_resource type="AudioStream" uid="uid://c3oxrlsk6ysgr" path="res://Assets/Sounds/jump.wav" id="20_vg775"]
 [ext_resource type="PackedScene" uid="uid://17j0xwkecdtv" path="res://Scenes/hurt_box.tscn" id="22_1fo7b"]
 
 [sub_resource type="Animation" id="Animation_12dql"]
@@ -153,8 +156,24 @@ script = ExtResource("4_vkjqw")
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("5_v53dd")
 
+[node name="FX" type="AudioStreamPlayer2D" parent="StateMachine/Attack"]
+stream = ExtResource("19_146d6")
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("19_m6q5m")
+
+[node name="FX" type="AudioStreamPlayer2D" parent="StateMachine/Jump"]
+stream = ExtResource("20_vg775")
+
+[node name="Range_Attack" type="Node" parent="StateMachine"]
+script = ExtResource("20_mig2v")
+
+[node name="Cooldown" type="Timer" parent="StateMachine/Range_Attack"]
+wait_time = 0.3
+one_shot = true
+
+[node name="FX" type="AudioStreamPlayer2D" parent="StateMachine/Range_Attack"]
+stream = ExtResource("19_146d6")
 
 [node name="PlayerInteractions" type="Node2D" parent="."]
 script = ExtResource("7_ago7c")
@@ -166,6 +185,7 @@ position = Vector2(-1.5, 1.5)
 shape = SubResource("RectangleShape2D_nq88x")
 
 [node name="HurtBox" parent="." instance=ExtResource("22_1fo7b")]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(7, 1)

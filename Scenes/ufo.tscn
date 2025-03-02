@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfgix31e85o3n"]
+[gd_scene load_steps=7 format=3 uid="uid://dfgix31e85o3n"]
 
 [ext_resource type="Texture2D" uid="uid://dtbe3t8by31nu" path="res://Assets/ufo.png" id="1_35nkw"]
+[ext_resource type="Texture2D" uid="uid://iji7j1l65uic" path="res://Assets/beam.png" id="2_5g552"]
+[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_ifr77"]
 
 [sub_resource type="GDScript" id="GDScript_fjler"]
 script/source = "extends Sprite2D
@@ -8,15 +10,26 @@ script/source = "extends Sprite2D
 const UFO_EDGE_POSITION = 200
 var ufo_starting_pos: float 
 var ufo_end_pos: float 
+@export var UFO_SPEED = 20
 
 var ray: RayCast2D
 var my_cow: Node
+const FINAL_BEAM_SCALE_Y = 4.1
+const BEAM_SPEED = 5
+var alpha: float = 0.0
+
+@onready var beam_sprite = $Beam
 
 func _ready() -> void:
 	ufo_starting_pos = self.position.x
 	ufo_end_pos = ufo_starting_pos + UFO_EDGE_POSITION
 	ray = $CowRay
 	my_cow = null
+	
+func die():
+	if my_cow and my_cow != null:
+		my_cow.release()
+	queue_free()
 
 func _process(delta: float):
 	if ray.is_colliding():  # If raycast found a cow
@@ -28,16 +41,18 @@ func _process(delta: float):
 			cow.get_beamed()
 			my_cow = cow   # I own this cow now
 		if cow == my_cow:  # If my_cow is still under my beam
+			beam_sprite.scale.y = FINAL_BEAM_SCALE_Y
 			return   # Do not move
+	beam_sprite.scale.y = 0
 	if ufo_starting_pos < ufo_end_pos:
-		self.position.x += 10 * delta
+		self.position.x += UFO_SPEED * delta
 		if self.position.x >= ufo_end_pos:
 			var temp = ufo_end_pos
 			ufo_end_pos = ufo_starting_pos
 			ufo_starting_pos = temp
 				
 	if ufo_starting_pos > ufo_end_pos:
-		self.position.x -= 10 *delta
+		self.position.x -= UFO_SPEED *delta
 		if self.position.x < ufo_end_pos:
 			var temp = ufo_starting_pos
 			ufo_starting_pos = ufo_end_pos
@@ -50,6 +65,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vh7w3"]
 size = Vector2(20, 14.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntofb"]
+size = Vector2(20, 2.8125)
 
 [node name="ufo" type="Sprite2D"]
 texture = ExtResource("1_35nkw")
@@ -66,5 +84,23 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(1, 3.25)
 shape = SubResource("RectangleShape2D_vh7w3")
+
+[node name="Beam" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
+position = Vector2(4, 3)
+scale = Vector2(-1, 4)
+texture = ExtResource("2_5g552")
+offset = Vector2(0, 15.54)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(4, 3)
+rotation = 3.14159
+scale = Vector2(1, -4)
+script = ExtResource("3_ifr77")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(3, -1.84375)
+shape = SubResource("RectangleShape2D_ntofb")
+debug_color = Color(0.889062, 0.286385, 0.414719, 0.42)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
