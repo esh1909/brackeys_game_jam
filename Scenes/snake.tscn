@@ -1,0 +1,270 @@
+[gd_scene load_steps=33 format=3 uid="uid://cbx1o8g33arqy"]
+
+[ext_resource type="Texture2D" uid="uid://bylg2a5fej6b4" path="res://Assets/snake ground/Untitled_Artwork-1.png" id="1_y5jj0"]
+[ext_resource type="Texture2D" uid="uid://r2ttx6fqco1j" path="res://Assets/snake ground/Untitled_Artwork-2.png" id="2_1lu8t"]
+[ext_resource type="Texture2D" uid="uid://cmamrwv5red6d" path="res://Assets/snake ground/Untitled_Artwork-3.png" id="3_di4s5"]
+[ext_resource type="Texture2D" uid="uid://bih0qsiw164uf" path="res://Assets/snake ground/Untitled_Artwork-4.png" id="4_8skq0"]
+[ext_resource type="Texture2D" uid="uid://pbivtw0ywlm1" path="res://Assets/snake ground/Untitled_Artwork-5.png" id="5_qoxuu"]
+[ext_resource type="Texture2D" uid="uid://lexcgq4db4oc" path="res://Assets/snake ground/Untitled_Artwork-6.png" id="6_h5mpx"]
+[ext_resource type="Texture2D" uid="uid://dpo3t87hhhs1u" path="res://Assets/snake ground/Untitled_Artwork-7.png" id="7_vtim7"]
+[ext_resource type="Texture2D" uid="uid://blw7yk5v6jbho" path="res://Assets/snake ground/Untitled_Artwork-8.png" id="8_fd4j2"]
+[ext_resource type="Texture2D" uid="uid://co1ve3kf8b621" path="res://Assets/snake ground/Untitled_Artwork-9.png" id="9_i6s60"]
+[ext_resource type="Texture2D" uid="uid://cd76guhh1bbpi" path="res://Assets/snake ground/Untitled_Artwork-10.png" id="10_k81wt"]
+[ext_resource type="Texture2D" uid="uid://cu0nnk775x8e0" path="res://Assets/snake ground/Untitled_Artwork-11.png" id="11_3jl30"]
+[ext_resource type="Texture2D" uid="uid://dypfkkymmi8ou" path="res://Assets/snake ground/Untitled_Artwork-12.png" id="12_mwxga"]
+[ext_resource type="Texture2D" uid="uid://k1bxq0tjy44a" path="res://Assets/snake ground/Untitled_Artwork-13.png" id="13_58wsm"]
+[ext_resource type="Texture2D" uid="uid://bn2jwnsd1ll1r" path="res://Assets/snake ground/Untitled_Artwork-14.png" id="14_e65rx"]
+[ext_resource type="Texture2D" uid="uid://b8wedg1v03utn" path="res://Assets/snake ground/Untitled_Artwork-15.png" id="15_3flql"]
+[ext_resource type="Texture2D" uid="uid://dgixphu1j4erj" path="res://Assets/snake ground/Untitled_Artwork-16.png" id="16_1qyxw"]
+[ext_resource type="Texture2D" uid="uid://obne8nqt4nk3" path="res://Assets/snake ground/Untitled_Artwork-17.png" id="17_xbrqu"]
+[ext_resource type="Texture2D" uid="uid://du0tyelgypsyy" path="res://Assets/snake_idle/Snake_Idle-3.png" id="18_3htri"]
+[ext_resource type="Texture2D" uid="uid://bjd7hrlxlyl1l" path="res://Assets/snake_idle/Snake_Idle-1.png" id="19_71rf1"]
+[ext_resource type="Texture2D" uid="uid://uqnsj4jtg4v5" path="res://Assets/snake_idle/Snake_Idle-2.png" id="20_km1vs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hsbvx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y5jj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1lu8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_di4s5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8skq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qoxuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h5mpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vtim7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fd4j2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i6s60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k81wt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3jl30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_mwxga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_58wsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_e65rx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3flql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1qyxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_xbrqu")
+}],
+"loop": true,
+"name": &"snake_ground",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_3htri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_71rf1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_km1vs")
+}],
+"loop": true,
+"name": &"snake_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_843ik"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_byt0e"]
+resource_name = "ground"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_ground"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 16]
+}
+
+[sub_resource type="Animation" id="Animation_h26o8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r77lj"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_ground"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [16, 0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ej5v0"]
+_data = {
+"RESET": SubResource("Animation_h26o8"),
+"die": SubResource("Animation_r77lj"),
+"ground": SubResource("Animation_byt0e"),
+"idle": SubResource("Animation_843ik")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]
+radius = 8.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ceo53"]
+animation = &"ground"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s6ifl"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sva8e"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_re3s1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ybyaj"]
+states/ground/node = SubResource("AnimationNodeAnimation_ceo53")
+states/ground/position = Vector2(409.5, 120.5)
+states/idle/node = SubResource("AnimationNodeAnimation_s6ifl")
+states/idle/position = Vector2(599.5, 104.5)
+transitions = ["Start", "ground", SubResource("AnimationNodeStateMachineTransition_sva8e"), "ground", "idle", SubResource("AnimationNodeStateMachineTransition_re3s1")]
+
+[node name="Snake" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hsbvx")
+animation = &"snake_idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ej5v0")
+}
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_uuxbi")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ybyaj")
+anim_player = NodePath("../AnimationPlayer")

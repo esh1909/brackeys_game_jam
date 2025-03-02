@@ -1,0 +1,156 @@
+[gd_scene load_steps=15 format=3 uid="uid://cl5axqe3rqmd7"]
+
+[ext_resource type="Texture2D" uid="uid://bwwaksho2tvem" path="res://Assets/cow_idle/Cow_Idle-1.png" id="1_rlfa5"]
+[ext_resource type="Script" path="res://Scripts/cow.gd" id="2_e5sas"]
+[ext_resource type="Texture2D" uid="uid://5qqs4d45n2br" path="res://Assets/cow_idle/Cow_Idle-2.png" id="2_xhdmv"]
+[ext_resource type="Texture2D" uid="uid://cxyfikrg6w3li" path="res://Assets/cow_scared/Cow_Scared-1.png" id="4_umo1k"]
+[ext_resource type="Texture2D" uid="uid://355dp7hll7c" path="res://Assets/cow_scared/Cow_Scared-2.png" id="5_6t1en"]
+[ext_resource type="Texture2D" uid="uid://dyy84d4i6mfwq" path="res://Assets/cow_scared/Cow_Scared-3.png" id="6_qpd14"]
+[ext_resource type="Texture2D" uid="uid://bn03ovr7o8fki" path="res://Assets/cow_scared/Cow_Scared-4.png" id="7_fb61w"]
+[ext_resource type="Texture2D" uid="uid://5muulv3mvmgs" path="res://Assets/cow_scared/Cow_Scared-5.png" id="8_v3dis"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4anr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rlfa5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xhdmv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_umo1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6t1en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qpd14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fb61w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_v3dis")
+}],
+"loop": true,
+"name": &"scared",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_423x1"]
+radius = 7.0
+
+[sub_resource type="Animation" id="Animation_sp8eo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"scared"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_800vu"]
+resource_name = "idle_cow"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_sa3us"]
+resource_name = "scared"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"scared"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f37q3"]
+_data = {
+"RESET": SubResource("Animation_sp8eo"),
+"idle_cow": SubResource("Animation_800vu"),
+"scared": SubResource("Animation_sa3us")
+}
+
+[node name="cow" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_e5sas")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k4anr")
+animation = &"scared"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 5)
+shape = SubResource("CircleShape2D_423x1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_f37q3")
+}

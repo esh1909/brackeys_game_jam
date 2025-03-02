@@ -1,28 +1,58 @@
-[gd_scene load_steps=14 format=3 uid="uid://dteeaorlt0ipr"]
+[gd_scene load_steps=27 format=3 uid="uid://dteeaorlt0ipr"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_0h7qc"]
-[ext_resource type="Texture2D" uid="uid://s42au7fbcpgi" path="res://Assets/PlayerSprite02.png" id="2_0axih"]
+[ext_resource type="Texture2D" uid="uid://8jrcawb43fqs" path="res://Assets/krish_idle/Krishna_Idle-1.png" id="2_0s5r7"]
 [ext_resource type="Script" path="res://Scripts/player_state_machine.gd" id="2_uq0ud"]
+[ext_resource type="Texture2D" uid="uid://ddrv1f43gnvjv" path="res://Assets/krish_idle/Krishna_Idle-2.png" id="3_1saqi"]
+[ext_resource type="Texture2D" uid="uid://bi43vs4heb0wm" path="res://Assets/Krish_attack/Krishna_Attack-1.png" id="3_gsbt7"]
 [ext_resource type="Script" path="res://Scripts/state_idle.gd" id="3_m85qh"]
+[ext_resource type="Texture2D" uid="uid://c4dix1o6yxt5y" path="res://Assets/Krish_attack/Krishna_Attack-2.png" id="4_65wyt"]
 [ext_resource type="Script" path="res://Scripts/state_walk.gd" id="4_vkjqw"]
+[ext_resource type="Texture2D" uid="uid://bpjnqk6gqphxu" path="res://Assets/Krish_attack/Krishna_Attack-3.png" id="5_cjbux"]
 [ext_resource type="Script" path="res://Scripts/state_attack.gd" id="5_v53dd"]
+[ext_resource type="Texture2D" uid="uid://n6theuuk1dp6" path="res://Assets/Krish_attack/Krishna_Attack-4.png" id="6_v5dxy"]
+[ext_resource type="Texture2D" uid="uid://b0avwxnf2qlrm" path="res://Assets/Krish_attack/Krishna_Attack-5.png" id="7_1b30l"]
 [ext_resource type="Script" path="res://Scripts/PlayerInteractions.gd" id="7_ago7c"]
+[ext_resource type="Texture2D" uid="uid://bqn43lwghdxx7" path="res://Assets/krish_walk/Krishna_Walk-2.png" id="9_50lk0"]
+[ext_resource type="Texture2D" uid="uid://c58srjcheo05n" path="res://Assets/krish_walk/Krishna_Walk-3.png" id="10_iy6rl"]
+[ext_resource type="Texture2D" uid="uid://bkn1aglq37sqm" path="res://Assets/krish_walk/Krishna_Walk-4.png" id="11_g482i"]
+[ext_resource type="Texture2D" uid="uid://dmeplaf1vmu81" path="res://Assets/krish_walk/Krishna_Walk-5.png" id="12_bk8jc"]
+[ext_resource type="Texture2D" uid="uid://cbp8ovoi8b37" path="res://Assets/krish_walk/Krishna_Walk-6.png" id="13_qiws5"]
+[ext_resource type="Texture2D" uid="uid://xvqjnlk7a7fv" path="res://Assets/krish_walk/Krishna_Walk-7.png" id="14_k0po3"]
+[ext_resource type="Script" path="res://Scenes/jump.gd" id="19_m6q5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enyto"]
+radius = 5.09902
 
 [sub_resource type="Animation" id="Animation_12dql"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [ExtResource("2_0s5r7")]
+}
+
+[sub_resource type="Animation" id="Animation_5nl3i"]
+resource_name = "attack_side"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("3_gsbt7"), ExtResource("4_65wyt"), ExtResource("5_cjbux"), ExtResource("6_v5dxy"), ExtResource("7_1b30l")]
 }
 
 [sub_resource type="Animation" id="Animation_rq1t4"]
@@ -32,47 +62,31 @@ loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0.00369457, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [6, 8]
+"values": [ExtResource("2_0s5r7"), ExtResource("3_1saqi")]
 }
 
 [sub_resource type="Animation" id="Animation_jp5hj"]
 resource_name = "walk_side"
-length = 0.3
-loop_mode = 2
+length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0666667, 0.150403, 0.233333, 0.317702, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [17, 20]
-}
-
-[sub_resource type="Animation" id="Animation_5nl3i"]
-resource_name = "attack_side"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [27, 29]
+"values": [ExtResource("3_gsbt7"), ExtResource("9_50lk0"), ExtResource("10_iy6rl"), ExtResource("11_g482i"), ExtResource("12_bk8jc"), ExtResource("13_qiws5"), ExtResource("14_k0po3")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2anc5"]
@@ -88,12 +102,10 @@ script = ExtResource("1_0h7qc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_0axih")
-hframes = 16
-vframes = 3
+texture = ExtResource("2_0s5r7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 11)
+position = Vector2(-1, 7)
 shape = SubResource("CircleShape2D_enyto")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -115,6 +127,9 @@ script = ExtResource("4_vkjqw")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("5_v53dd")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("19_m6q5m")
 
 [node name="PlayerInteractions" type="Node2D" parent="."]
 script = ExtResource("7_ago7c")

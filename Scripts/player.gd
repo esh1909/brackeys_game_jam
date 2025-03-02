@@ -3,7 +3,11 @@ class_name Player extends CharacterBody2D
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
 const DIR_2 = [Vector2.RIGHT, Vector2.LEFT]
+const jump_force = 200
+const MAX_SPEED = 100
+const GRAVITY = 10
 
+var can_move = true
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
@@ -20,13 +24,22 @@ func _process(delta):
 	
 	#direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	#direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	direction = Vector2(
-		Input.get_axis("left", "right"), 
-		0
-	).normalized()
+	if can_move:
+		direction = Vector2(
+			Input.get_axis("left", "right"), 
+			0
+		).normalized()
+	else:
+		direction = Vector2.ZERO
+		velocity.x = 0
+	
 
 func _physics_process(delta):
-	velocity = direction*100 + Vector2(0, 9)
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y -= jump_force
+	velocity += direction*100 + Vector2(0, GRAVITY)
+	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+	#print(velocity)
 	move_and_slide()
 
 #for changing player direction based on movement	
@@ -55,9 +68,9 @@ func UpdateAnimation(state: String) -> void:
 	
 #which direction player is facing
 func AnimDirection() -> String:
-	if cardinal_direction == Vector2.DOWN:
-		return "down"
-	elif cardinal_direction == Vector2.UP:
-		return "up"
-	else:
+	#if cardinal_direction == Vector2.DOWN:
+		#return "down"
+	#elif cardinal_direction == Vector2.UP:
+		#return "up"
+	#else:
 		return "side"

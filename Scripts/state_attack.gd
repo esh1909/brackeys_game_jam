@@ -5,7 +5,7 @@ var attacking : bool = false
 @export_range(1, 20 , 0.5) var decelrate_speed : float = 5.0
 
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
-@onready var attack_anim: AnimationPlayer = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
+#@onready var attack_anim: AnimationPlayer = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
 
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
@@ -17,17 +17,19 @@ var attacking : bool = false
 #What happens when player enters this state
 func Enter() -> void:
 	player.UpdateAnimation("attack")
-	attack_anim.play("attack_" + player.AnimDirection())
+	animation_player.play("attack_side")
 	animation_player.animation_finished.connect(EndAttack)
 	
-	audio.stream = attack_sound
-	audio.pitch_scale = randf_range(0.9 , 1.1)
-	audio.play()
+	#audio.stream = attack_sound
+	#audio.pitch_scale = randf_range(0.9 , 1.1)
+	#audio.play()
 	attacking = true
+	player.can_move = false
+	player.velocity.x = 0
 	
 	await get_tree().create_timer(0.075).timeout
 	
-	hurt_box.monitoring = true
+	#hurt_box.monitoring = true
 	pass
 	
 	
@@ -35,8 +37,9 @@ func Enter() -> void:
 func Exit() -> void:
 	animation_player.animation_finished.disconnect(EndAttack)
 	attacking = false
+	player.can_move = true
 	
-	hurt_box.monitoring = false
+	#hurt_box.monitoring = false
 	pass
 	
 	

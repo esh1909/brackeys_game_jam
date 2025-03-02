@@ -2,11 +2,13 @@ class_name State_Idle extends State
 
 @onready var walk: State = $"../Walk"
 @onready var attack: State = $"../Attack"
+@onready var jump: State = $"../Jump"
 
 
 #What happens when player enters this state
 func Enter() -> void:
 	player.UpdateAnimation("idle")
+	print("Idle anim")
 	pass
 	
 	
@@ -17,9 +19,11 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(delta : float) -> State:
-	if player.direction != Vector2.ZERO:
+	if not player.is_on_floor():
+		return jump
+	if player.direction.x != 0:
 		return walk
-	player.velocity = Vector2.ZERO
+	player.velocity.x = 0
 	return null
 	
 
