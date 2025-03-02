@@ -1,5 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cbx1o8g33arqy"]
+[gd_scene load_steps=34 format=3 uid="uid://cbx1o8g33arqy"]
 
+[ext_resource type="PackedScene" uid="uid://bo6g4of2nm44a" path="res://Scenes/hit_box.tscn" id="1_2uo8v"]
 [ext_resource type="Texture2D" uid="uid://bylg2a5fej6b4" path="res://Assets/snake ground/Untitled_Artwork-1.png" id="1_y5jj0"]
 [ext_resource type="Texture2D" uid="uid://r2ttx6fqco1j" path="res://Assets/snake ground/Untitled_Artwork-2.png" id="2_1lu8t"]
 [ext_resource type="Texture2D" uid="uid://cmamrwv5red6d" path="res://Assets/snake ground/Untitled_Artwork-3.png" id="3_di4s5"]
@@ -20,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://du0tyelgypsyy" path="res://Assets/snake_idle/Snake_Idle-3.png" id="18_3htri"]
 [ext_resource type="Texture2D" uid="uid://bjd7hrlxlyl1l" path="res://Assets/snake_idle/Snake_Idle-1.png" id="19_71rf1"]
 [ext_resource type="Texture2D" uid="uid://uqnsj4jtg4v5" path="res://Assets/snake_idle/Snake_Idle-2.png" id="20_km1vs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hsbvx"]
 animations = [{
@@ -94,62 +97,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_843ik"]
-resource_name = "idle"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"snake_idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 2]
-}
-
-[sub_resource type="Animation" id="Animation_byt0e"]
-resource_name = "ground"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"snake_ground"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 16]
-}
-
 [sub_resource type="Animation" id="Animation_h26o8"]
 length = 0.001
 tracks/0/type = "value"
@@ -218,6 +165,62 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_byt0e"]
+resource_name = "ground"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_ground"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 16]
+}
+
+[sub_resource type="Animation" id="Animation_843ik"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"snake_idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ej5v0"]
 _data = {
 "RESET": SubResource("Animation_h26o8"),
@@ -225,9 +228,6 @@ _data = {
 "ground": SubResource("Animation_byt0e"),
 "idle": SubResource("Animation_843ik")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]
-radius = 8.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ceo53"]
 animation = &"ground"
@@ -251,6 +251,12 @@ transitions = ["Start", "ground", SubResource("AnimationNodeStateMachineTransiti
 
 [node name="Snake" type="CharacterBody2D"]
 
+[node name="HitBox" parent="." instance=ExtResource("1_2uo8v")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_uuxbi")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hsbvx")
 animation = &"snake_idle"
@@ -261,10 +267,10 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_uuxbi")
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ybyaj")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_uuxbi")

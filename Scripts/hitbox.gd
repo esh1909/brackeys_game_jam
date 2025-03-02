@@ -15,4 +15,7 @@ func _process(delta: float) -> void:
 
 func TakeDamage(damage : int) -> void:
 	print("TakeDamage " ,damage)
-	Damaged.emit(damage)
+	#Damaged.emit(damage)
+	get_parent().queue_free()
+	#print(get_parent(), "hitbox parent")
+	

@@ -10,7 +10,7 @@ var attacking : bool = false
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
 @onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
-@onready var hurt_box: HurtBox = %AttackHurtBox
+@onready var hurt_box: HurtBox = $"../../HurtBox" 
 
 
 
@@ -29,7 +29,7 @@ func Enter() -> void:
 	
 	await get_tree().create_timer(0.075).timeout
 	
-	#hurt_box.monitoring = true
+	hurt_box.monitoring = true
 	pass
 	
 	
@@ -39,7 +39,7 @@ func Exit() -> void:
 	attacking = false
 	player.can_move = true
 	
-	#hurt_box.monitoring = false
+	hurt_box.monitoring = false
 	pass
 	
 	
