@@ -9,7 +9,7 @@ var attacking : bool = false
 
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
-@onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
+#@onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 @onready var hurt_box: HurtBox = $"../../HurtBox" 
 
 
@@ -56,7 +56,7 @@ func Process(delta : float) -> State:
 	
 
 #what happens during _physics_process update in this state
-func Physics(delta : float) -> State:
+func Physics(_delta : float) -> State:
 	return null
 	
 	

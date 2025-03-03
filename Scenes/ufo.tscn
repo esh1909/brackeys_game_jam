@@ -20,6 +20,8 @@ var alpha: float = 0.0
 
 @onready var beam_sprite = $Beam
 
+signal ufo_died
+
 func _ready() -> void:
 	ufo_starting_pos = self.position.x
 	ufo_end_pos = ufo_starting_pos + UFO_EDGE_POSITION
@@ -29,6 +31,8 @@ func _ready() -> void:
 func die():
 	if my_cow and my_cow != null:
 		my_cow.release()
+	
+	ufo_died.emit()
 	queue_free()
 
 func _process(delta: float):
@@ -37,7 +41,7 @@ func _process(delta: float):
 		if cow == null:
 			return
 		#print(\"Pick the cow up\", ray.get_collider())
-		if not cow.is_being_beamed:   # If the cow is not already being beamed by a UFO
+		if cow is Cow and not cow.is_being_beamed:   # If the cow is not already being beamed by a UFO
 			cow.get_beamed()
 			my_cow = cow   # I own this cow now
 		if cow == my_cow:  # If my_cow is still under my beam

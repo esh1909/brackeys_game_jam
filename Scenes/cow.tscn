@@ -141,6 +141,9 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_e5sas")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2, 5)
+
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_k4anr")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cbx1o8g33arqy"]
+[gd_scene load_steps=33 format=3 uid="uid://cbx1o8g33arqy"]
 
 [ext_resource type="PackedScene" uid="uid://bo6g4of2nm44a" path="res://Scenes/hit_box.tscn" id="1_2uo8v"]
 [ext_resource type="Script" path="res://Scenes/snake.gd" id="1_cvqxx"]
@@ -22,8 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://du0tyelgypsyy" path="res://Assets/snake_idle/Snake_Idle-3.png" id="18_3htri"]
 [ext_resource type="Texture2D" uid="uid://bjd7hrlxlyl1l" path="res://Assets/snake_idle/Snake_Idle-1.png" id="19_71rf1"]
 [ext_resource type="Texture2D" uid="uid://uqnsj4jtg4v5" path="res://Assets/snake_idle/Snake_Idle-2.png" id="20_km1vs"]
+[ext_resource type="Script" path="res://Scripts/hurt_box.gd" id="23_27w1p"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xwsq"]
+radius = 8.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hsbvx"]
 animations = [{
@@ -124,6 +126,42 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtBox:monitorable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_r77lj"]
 resource_name = "die"
@@ -164,6 +202,42 @@ tracks/2/keys = {
 "args": [],
 "method": &"queue_free"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtBox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtBox:monitorable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_byt0e"]
@@ -230,6 +304,11 @@ _data = {
 "idle": SubResource("Animation_843ik")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pdi3n"]
+
 [node name="Snake" type="CharacterBody2D"]
 script = ExtResource("1_cvqxx")
 
@@ -237,7 +316,7 @@ script = ExtResource("1_cvqxx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_uuxbi")
+shape = SubResource("CircleShape2D_4xwsq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hsbvx")
@@ -250,5 +329,15 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_uuxbi")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("23_27w1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_pdi3n")
+debug_color = Color(0.877254, 0.246278, 0.601493, 0.42)

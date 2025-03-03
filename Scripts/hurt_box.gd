@@ -9,13 +9,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
-	
-	
-	
+
 func AreaEntered(a : Area2D) -> void:
-	print("hurtbox")
+	print("hurtbox ", get_parent())
 	if a is HitBox:
 		if self.get_parent() != a.get_parent():
 			a.TakeDamage(damage)

@@ -62,10 +62,4 @@ autoplay = "idle_butter"
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_c5jhi")
 
-[node name="ButterLeave" type="Timer" parent="."]
-wait_time = 15.0
-one_shot = true
-autostart = true
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="ButterLeave" to="." method="_on_butter_leave_timeout"]

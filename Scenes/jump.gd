@@ -19,14 +19,14 @@ func Exit() -> void:
 	
 	
 #what happens during process update in this state
-func Process(delta : float) -> State:
+func Process(_delta : float) -> State:
 	if player.is_on_floor():
 		return idle
 	return null
 	
 
 #what happens during _physics_process update in this state
-func Physics(delta : float) -> State:
+func Physics(_delta : float) -> State:
 	return null
 	
 	

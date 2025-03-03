@@ -12,16 +12,20 @@ var can_move = true
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var state_machine: PlayerStateMachine = $StateMachine
-@onready var audio_player = $FX
 
 signal DirectionChanged(new_direction: Vector2)
+
+signal damaged
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_machine.Initialize(self)
+	
+func take_damage():
+	damaged.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 	#direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	#direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -34,10 +38,7 @@ func _process(delta):
 		direction = Vector2.ZERO
 		velocity.x = 0
 	
-func get_audio_player() -> AudioStreamPlayer2D:
-	return audio_player
-	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y -= jump_force
 	velocity += direction*100 + Vector2(0, GRAVITY)
@@ -53,14 +54,13 @@ func SetDirection() -> bool :
 	var direction_id : int = int( round( (direction + cardinal_direction * 0.1).angle() / TAU * DIR_2.size() ) )
 	var new_dir = DIR_2[direction_id]
 		
-	
-		
-	if new_dir == cardinal_direction:
-		return false
-		
 	cardinal_direction = new_dir
 	DirectionChanged.emit(new_dir)
 	sprite.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
+	
+	var hurt_box_collider = $HurtBox/CollisionShape2D
+	hurt_box_collider.position.x = -abs(hurt_box_collider.position.x) if cardinal_direction == Vector2.LEFT else abs(hurt_box_collider.position.x)
+	
 	return true
 
 func UpdateAnimation(state: String) -> void:
