@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cl5axqe3rqmd7"]
 
 [ext_resource type="Texture2D" uid="uid://bwwaksho2tvem" path="res://Assets/cow_idle/Cow_Idle-1.png" id="1_rlfa5"]
-[ext_resource type="Script" path="res://Scripts/cow.gd" id="2_e5sas"]
+[ext_resource type="Script" uid="uid://boq45c2e1pgjo" path="res://Scripts/cow.gd" id="2_e5sas"]
 [ext_resource type="Texture2D" uid="uid://5qqs4d45n2br" path="res://Assets/cow_idle/Cow_Idle-2.png" id="2_xhdmv"]
 [ext_resource type="Texture2D" uid="uid://cxyfikrg6w3li" path="res://Assets/cow_scared/Cow_Scared-1.png" id="4_umo1k"]
 [ext_resource type="Texture2D" uid="uid://355dp7hll7c" path="res://Assets/cow_scared/Cow_Scared-2.png" id="5_6t1en"]
@@ -131,9 +131,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f37q3"]
 _data = {
-"RESET": SubResource("Animation_sp8eo"),
-"idle_cow": SubResource("Animation_800vu"),
-"scared": SubResource("Animation_sa3us")
+&"RESET": SubResource("Animation_sp8eo"),
+&"idle_cow": SubResource("Animation_800vu"),
+&"scared": SubResource("Animation_sa3us")
 }
 
 [node name="cow" type="CharacterBody2D"]

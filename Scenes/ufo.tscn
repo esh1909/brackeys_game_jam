@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dtbe3t8by31nu" path="res://Assets/ufo.png" id="1_35nkw"]
 [ext_resource type="Texture2D" uid="uid://iji7j1l65uic" path="res://Assets/beam.png" id="2_5g552"]
-[ext_resource type="Script" path="res://Scripts/hitbox.gd" id="3_ifr77"]
+[ext_resource type="Script" uid="uid://dhvow1gvtx446" path="res://Scripts/hitbox.gd" id="3_ifr77"]
 
 [sub_resource type="GDScript" id="GDScript_fjler"]
 script/source = "extends Sprite2D

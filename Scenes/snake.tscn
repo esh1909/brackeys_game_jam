@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://cbx1o8g33arqy"]
 
 [ext_resource type="PackedScene" uid="uid://bo6g4of2nm44a" path="res://Scenes/hit_box.tscn" id="1_2uo8v"]
-[ext_resource type="Script" path="res://Scenes/snake.gd" id="1_cvqxx"]
+[ext_resource type="Script" uid="uid://bp7ijt4afes1l" path="res://Scenes/snake.gd" id="1_cvqxx"]
 [ext_resource type="Texture2D" uid="uid://bylg2a5fej6b4" path="res://Assets/snake ground/Untitled_Artwork-1.png" id="1_y5jj0"]
 [ext_resource type="Texture2D" uid="uid://r2ttx6fqco1j" path="res://Assets/snake ground/Untitled_Artwork-2.png" id="2_1lu8t"]
 [ext_resource type="Texture2D" uid="uid://cmamrwv5red6d" path="res://Assets/snake ground/Untitled_Artwork-3.png" id="3_di4s5"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://du0tyelgypsyy" path="res://Assets/snake_idle/Snake_Idle-3.png" id="18_3htri"]
 [ext_resource type="Texture2D" uid="uid://bjd7hrlxlyl1l" path="res://Assets/snake_idle/Snake_Idle-1.png" id="19_71rf1"]
 [ext_resource type="Texture2D" uid="uid://uqnsj4jtg4v5" path="res://Assets/snake_idle/Snake_Idle-2.png" id="20_km1vs"]
-[ext_resource type="Script" path="res://Scripts/hurt_box.gd" id="23_27w1p"]
+[ext_resource type="Script" uid="uid://brotkj7sv5p8c" path="res://Scripts/hurt_box.gd" id="23_27w1p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xwsq"]
 radius = 8.0
@@ -298,10 +298,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ej5v0"]
 _data = {
-"RESET": SubResource("Animation_h26o8"),
-"die": SubResource("Animation_r77lj"),
-"ground": SubResource("Animation_byt0e"),
-"idle": SubResource("Animation_843ik")
+&"RESET": SubResource("Animation_h26o8"),
+&"die": SubResource("Animation_r77lj"),
+&"ground": SubResource("Animation_byt0e"),
+&"idle": SubResource("Animation_843ik")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uuxbi"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bultd5egnbq2p"]
 
 [ext_resource type="Texture2D" uid="uid://dhfeffbja67ao" path="res://Assets/butter.png" id="1_kwhcm"]
-[ext_resource type="Script" path="res://Scripts/butter.gd" id="1_oqk8p"]
+[ext_resource type="Script" uid="uid://ch6r7p244nxjm" path="res://Scripts/butter.gd" id="1_oqk8p"]
 
 [sub_resource type="Animation" id="Animation_30d0d"]
 length = 0.001
@@ -37,8 +37,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hn8po"]
 _data = {
-"RESET": SubResource("Animation_30d0d"),
-"idle_butter": SubResource("Animation_rbfpk")
+&"RESET": SubResource("Animation_30d0d"),
+&"idle_butter": SubResource("Animation_rbfpk")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c5jhi"]

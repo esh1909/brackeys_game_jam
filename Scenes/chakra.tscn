@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://0amvwunyu65k"]
 
 [ext_resource type="Texture2D" uid="uid://36pw0r3y2rt4" path="res://Assets/chakra/chakra.png" id="1_8q1bf"]
-[ext_resource type="Script" path="res://Scenes/chakra.gd" id="1_jvjc2"]
-[ext_resource type="Script" path="res://Scripts/hurt_box.gd" id="3_qf3pa"]
+[ext_resource type="Script" uid="uid://bhi14usmfmor1" path="res://Scenes/chakra.gd" id="1_jvjc2"]
+[ext_resource type="Script" uid="uid://brotkj7sv5p8c" path="res://Scripts/hurt_box.gd" id="3_qf3pa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_20al4"]
 radius = 3.0

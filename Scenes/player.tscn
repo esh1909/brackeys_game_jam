@@ -1,19 +1,19 @@
 [gd_scene load_steps=34 format=3 uid="uid://dteeaorlt0ipr"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_0h7qc"]
+[ext_resource type="Script" uid="uid://k1878du6fwcw" path="res://Scripts/player.gd" id="1_0h7qc"]
 [ext_resource type="Texture2D" uid="uid://8jrcawb43fqs" path="res://Assets/krish_idle/Krishna_Idle-1.png" id="2_0s5r7"]
-[ext_resource type="Script" path="res://Scripts/player_state_machine.gd" id="2_uq0ud"]
+[ext_resource type="Script" uid="uid://dleamxkby4byd" path="res://Scripts/player_state_machine.gd" id="2_uq0ud"]
 [ext_resource type="Texture2D" uid="uid://ddrv1f43gnvjv" path="res://Assets/krish_idle/Krishna_Idle-2.png" id="3_1saqi"]
 [ext_resource type="Texture2D" uid="uid://bi43vs4heb0wm" path="res://Assets/Krish_attack/Krishna_Attack-1.png" id="3_gsbt7"]
 [ext_resource type="PackedScene" uid="uid://bo6g4of2nm44a" path="res://Scenes/hit_box.tscn" id="3_k7xdl"]
-[ext_resource type="Script" path="res://Scripts/state_idle.gd" id="3_m85qh"]
+[ext_resource type="Script" uid="uid://cgr3j3ad48mbp" path="res://Scripts/state_idle.gd" id="3_m85qh"]
 [ext_resource type="Texture2D" uid="uid://c4dix1o6yxt5y" path="res://Assets/Krish_attack/Krishna_Attack-2.png" id="4_65wyt"]
-[ext_resource type="Script" path="res://Scripts/state_walk.gd" id="4_vkjqw"]
+[ext_resource type="Script" uid="uid://6e4fuw4bjdi0" path="res://Scripts/state_walk.gd" id="4_vkjqw"]
 [ext_resource type="Texture2D" uid="uid://bpjnqk6gqphxu" path="res://Assets/Krish_attack/Krishna_Attack-3.png" id="5_cjbux"]
-[ext_resource type="Script" path="res://Scripts/state_attack.gd" id="5_v53dd"]
+[ext_resource type="Script" uid="uid://y7p6g5qd6h15" path="res://Scripts/state_attack.gd" id="5_v53dd"]
 [ext_resource type="Texture2D" uid="uid://n6theuuk1dp6" path="res://Assets/Krish_attack/Krishna_Attack-4.png" id="6_v5dxy"]
 [ext_resource type="Texture2D" uid="uid://b0avwxnf2qlrm" path="res://Assets/Krish_attack/Krishna_Attack-5.png" id="7_1b30l"]
-[ext_resource type="Script" path="res://Scripts/PlayerInteractions.gd" id="7_ago7c"]
+[ext_resource type="Script" uid="uid://vuhse8w1omc2" path="res://Scripts/PlayerInteractions.gd" id="7_ago7c"]
 [ext_resource type="Texture2D" uid="uid://bqn43lwghdxx7" path="res://Assets/krish_walk/Krishna_Walk-2.png" id="9_50lk0"]
 [ext_resource type="Texture2D" uid="uid://c58srjcheo05n" path="res://Assets/krish_walk/Krishna_Walk-3.png" id="10_iy6rl"]
 [ext_resource type="Texture2D" uid="uid://bkn1aglq37sqm" path="res://Assets/krish_walk/Krishna_Walk-4.png" id="11_g482i"]
@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://cbp8ovoi8b37" path="res://Assets/krish_walk/Krishna_Walk-6.png" id="13_qiws5"]
 [ext_resource type="Texture2D" uid="uid://xvqjnlk7a7fv" path="res://Assets/krish_walk/Krishna_Walk-7.png" id="14_k0po3"]
 [ext_resource type="AudioStream" uid="uid://qiqtnpdlp1lv" path="res://Assets/Sounds/hitHurt.wav" id="19_146d6"]
-[ext_resource type="Script" path="res://Scenes/jump.gd" id="19_m6q5m"]
-[ext_resource type="Script" path="res://Scenes/range_attack.gd" id="20_mig2v"]
+[ext_resource type="Script" uid="uid://bqs7dj1rtx028" path="res://Scenes/jump.gd" id="19_m6q5m"]
+[ext_resource type="Script" uid="uid://b154fvmgpr7bj" path="res://Scenes/range_attack.gd" id="20_mig2v"]
 [ext_resource type="AudioStream" uid="uid://c3oxrlsk6ysgr" path="res://Assets/Sounds/jump.wav" id="20_vg775"]
 [ext_resource type="PackedScene" uid="uid://17j0xwkecdtv" path="res://Scenes/hurt_box.tscn" id="22_1fo7b"]
 
@@ -93,10 +93,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2anc5"]
 _data = {
-"RESET": SubResource("Animation_12dql"),
-"attack_side": SubResource("Animation_5nl3i"),
-"idle_side": SubResource("Animation_rq1t4"),
-"walk_side": SubResource("Animation_jp5hj")
+&"RESET": SubResource("Animation_12dql"),
+&"attack_side": SubResource("Animation_5nl3i"),
+&"idle_side": SubResource("Animation_rq1t4"),
+&"walk_side": SubResource("Animation_jp5hj")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2eqr"]
