@@ -1,13 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://cl5axqe3rqmd7"]
+[gd_scene load_steps=38 format=3 uid="uid://cl5axqe3rqmd7"]
 
 [ext_resource type="Texture2D" uid="uid://bwwaksho2tvem" path="res://Assets/cow_idle/Cow_Idle-1.png" id="1_rlfa5"]
 [ext_resource type="Script" uid="uid://boq45c2e1pgjo" path="res://Scripts/cow.gd" id="2_e5sas"]
 [ext_resource type="Texture2D" uid="uid://5qqs4d45n2br" path="res://Assets/cow_idle/Cow_Idle-2.png" id="2_xhdmv"]
+[ext_resource type="Texture2D" uid="uid://blmi3br0pakgy" path="res://Assets/cow_to_scared/Cow_Scared-1.png" id="4_qg7rv"]
 [ext_resource type="Texture2D" uid="uid://cxyfikrg6w3li" path="res://Assets/cow_scared/Cow_Scared-1.png" id="4_umo1k"]
 [ext_resource type="Texture2D" uid="uid://355dp7hll7c" path="res://Assets/cow_scared/Cow_Scared-2.png" id="5_6t1en"]
+[ext_resource type="Texture2D" uid="uid://ccjtlwk356sfk" path="res://Assets/cow_to_scared/Cow_Scared-2.png" id="5_d3eay"]
+[ext_resource type="Texture2D" uid="uid://cmwgxcigugmq0" path="res://Assets/cow_to_scared/Cow_Scared-3.png" id="6_8ssyy"]
 [ext_resource type="Texture2D" uid="uid://dyy84d4i6mfwq" path="res://Assets/cow_scared/Cow_Scared-3.png" id="6_qpd14"]
 [ext_resource type="Texture2D" uid="uid://bn03ovr7o8fki" path="res://Assets/cow_scared/Cow_Scared-4.png" id="7_fb61w"]
+[ext_resource type="Texture2D" uid="uid://dsy0t6ceba633" path="res://Assets/cow_to_scared/Cow_Scared-4.png" id="7_wsq6f"]
+[ext_resource type="Texture2D" uid="uid://dedugnd5er1hq" path="res://Assets/cow_to_scared/Cow_Scared-5.png" id="8_b4xbx"]
 [ext_resource type="Texture2D" uid="uid://5muulv3mvmgs" path="res://Assets/cow_scared/Cow_Scared-5.png" id="8_v3dis"]
+[ext_resource type="Texture2D" uid="uid://bb8y15nhvbs02" path="res://Assets/cow_to_scared/Cow_Scared-6.png" id="9_2gkwg"]
+[ext_resource type="Texture2D" uid="uid://btb6ae2tavcvv" path="res://Assets/cow_to_scared/Cow_Scared-7.png" id="10_nyuhl"]
+[ext_resource type="Texture2D" uid="uid://b87xbuwcknnu1" path="res://Assets/cow_to_scared/Cow_Scared-8.png" id="11_ixapf"]
+[ext_resource type="Texture2D" uid="uid://dimgt45cbb7ua" path="res://Assets/cow_to_scared/Cow_Scared-9.png" id="12_2qw4w"]
+[ext_resource type="Texture2D" uid="uid://dkhh5hp0j85tv" path="res://Assets/cow_to_scared/Cow_Scared-10.png" id="13_cuji6"]
+[ext_resource type="Texture2D" uid="uid://b78ywnmi78oxh" path="res://Assets/cow_to_scared/Cow_Scared-11.png" id="14_rtftd"]
+[ext_resource type="Texture2D" uid="uid://cvhkgl53voii7" path="res://Assets/cow_to_scared/Cow_Scared-12.png" id="15_43egv"]
+[ext_resource type="Texture2D" uid="uid://b3xtaxxgftinb" path="res://Assets/cow_to_scared/Cow_Scared-13.png" id="16_hj0an"]
+[ext_resource type="Texture2D" uid="uid://b1mi1ctg8f1jj" path="res://Assets/cow_to_scared/Cow_Scared-14.png" id="17_yahvn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k4anr"]
 animations = [{
@@ -20,6 +34,53 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qg7rv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d3eay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8ssyy")
+}, {
+"duration": 5.0,
+"texture": ExtResource("7_wsq6f")
+}, {
+"duration": 5.0,
+"texture": ExtResource("8_b4xbx")
+}, {
+"duration": 5.0,
+"texture": ExtResource("9_2gkwg")
+}, {
+"duration": 5.0,
+"texture": ExtResource("10_nyuhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ixapf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2qw4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_cuji6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rtftd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_43egv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hj0an")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_yahvn")
+}],
+"loop": true,
+"name": &"idle_to_scared",
 "speed": 5.0
 }, {
 "frames": [{
@@ -45,6 +106,40 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_423x1"]
 radius = 7.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnpf5"]
+animation = &"idle_cow"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qg7rv"]
+animation = &"idle_to_scared"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3eay"]
+animation = &"scared"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eesv7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ssyy"]
+advance_mode = 2
+advance_expression = "is_being_beamed"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wsq6f"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2gkwg"]
+advance_mode = 2
+advance_expression = "is_on_floor() and not is_being_beamed"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jx85s"]
+states/Start/position = Vector2(137, 112)
+states/idle_cow/node = SubResource("AnimationNodeAnimation_rnpf5")
+states/idle_cow/position = Vector2(303, 222)
+states/idle_to_scared/node = SubResource("AnimationNodeAnimation_qg7rv")
+states/idle_to_scared/position = Vector2(489, 84)
+states/scared/node = SubResource("AnimationNodeAnimation_d3eay")
+states/scared/position = Vector2(647, 211)
+transitions = ["Start", "idle_cow", SubResource("AnimationNodeStateMachineTransition_eesv7"), "idle_cow", "idle_to_scared", SubResource("AnimationNodeStateMachineTransition_8ssyy"), "idle_to_scared", "scared", SubResource("AnimationNodeStateMachineTransition_wsq6f"), "scared", "idle_cow", SubResource("AnimationNodeStateMachineTransition_2gkwg")]
 
 [sub_resource type="Animation" id="Animation_sp8eo"]
 length = 0.001
@@ -129,10 +224,39 @@ tracks/1/keys = {
 "values": [0, 4]
 }
 
+[sub_resource type="Animation" id="Animation_v1jvh"]
+resource_name = "idle_to_scared"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle_to_scared"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 3.43333, 4.13333, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 3, 6, 6, 13]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f37q3"]
 _data = {
 &"RESET": SubResource("Animation_sp8eo"),
 &"idle_cow": SubResource("Animation_800vu"),
+&"idle_to_scared": SubResource("Animation_v1jvh"),
 &"scared": SubResource("Animation_sa3us")
 }
 
@@ -153,8 +277,14 @@ animation = &"scared"
 position = Vector2(2, 5)
 shape = SubResource("CircleShape2D_423x1")
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_jx85s")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_f37q3")
+&"": SubResource("AnimationLibrary_f37q3")
 }

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var amount_of_cows = 10
+@export var amount_of_cows = 4
 @export var amount_of_butter = 2
 @export var amount_of_ufos = 3
 @export var amount_of_snakes = 5
