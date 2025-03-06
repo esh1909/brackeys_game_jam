@@ -5,11 +5,9 @@ var attacking : bool = false
 @export_range(1, 20 , 0.5) var decelrate_speed : float = 5.0
 
 @onready var animation_player: AnimationPlayer = $"../../AnimationPlayer"
-#@onready var attack_anim: AnimationPlayer = $"../../Sprite2D/AttackEffectSprite/AnimationPlayer"
 
 @onready var walk: State = $"../Walk"
 @onready var idle: State = $"../Idle"
-#@onready var audio: AudioStreamPlayer2D = $"../../Audio/AudioStreamPlayer2D"
 @onready var hurt_box: HurtBox = $"../../HurtBox" 
 
 
@@ -20,9 +18,6 @@ func Enter() -> void:
 	animation_player.play("attack_side")
 	animation_player.animation_finished.connect(EndAttack)
 	$FX.play()
-	#audio.stream = attack_sound
-	#audio.pitch_scale = randf_range(0.9 , 1.1)
-	#audio.play()
 	attacking = true
 	player.can_move = false
 	player.velocity.x = 0

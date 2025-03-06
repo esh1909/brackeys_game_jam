@@ -156,7 +156,6 @@ func create_snakes(x_pos):
 	
 func _butter_collected(node: Node):
 	_butter_level += 1
-	#score.text = "Butter: " + str(_butter_level)
 
 func generate_butter():
 	#create the butter

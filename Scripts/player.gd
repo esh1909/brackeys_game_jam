@@ -70,9 +70,4 @@ func UpdateAnimation(state: String) -> void:
 	
 #which direction player is facing
 func AnimDirection() -> String:
-	#if cardinal_direction == Vector2.DOWN:
-		#return "down"
-	#elif cardinal_direction == Vector2.UP:
-		#return "up"
-	#else:
-		return "side"
+	return "side"

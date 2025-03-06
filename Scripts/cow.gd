@@ -6,10 +6,6 @@ var is_being_beamed = false
 
 @onready var _anim_state_machine: AnimationNodeStateMachinePlayback= $AnimationTree.get("parameters/playback")
 
-#func _play_idle():
-	#$AnimationPlayer.play("idle_cow")
-	#$AnimationPlayer.seek(randf_range(0, 0.3), true)
-	#$AnimationPlayer.speed_scale = randf_range(0.7,2)
 func take_damage():
 	print("Player hit cow")
 	_anim_state_machine.travel("confused")
@@ -24,9 +20,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		#gravity
 		velocity += Vector2.DOWN * GRAVITY * delta
-		if is_on_floor() and not _anim_state_machine.get_current_node() == "idle_cow":
-			pass
-			#_play_idle()
 	move_and_slide()
 	
 	
@@ -36,8 +29,6 @@ func die():
 	queue_free()
 
 func get_beamed():
-	#$AnimationPlayer.play("scared")
 	is_being_beamed = true
 	SignalBus.beam_started.emit(self)
 
-# Called when the node enters the scene tree for the first time.

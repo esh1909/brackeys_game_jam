@@ -22,6 +22,7 @@ func Exit() -> void:
 func Process(_delta : float) -> State:
 	if player.is_on_floor():
 		return idle
+	player.velocity.x = lerp(player.velocity.x, 0.0, 6*_delta)
 	return null
 	
 
