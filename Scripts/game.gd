@@ -24,8 +24,8 @@ var _current_snakes_in_game = 0
 @onready var player = $Player
 @onready var _butter_level:float = starting_butter
 
-var _cows_beamed_on_left = 0
-var _cows_beamed_on_right = 0
+var _cows_beamed_on_left: Array[Cow] = []
+var _cows_beamed_on_right: Array[Cow] = []
 var _butters_collected_so_far = 0
 
 var positions: Array[int]
@@ -82,12 +82,12 @@ func _process(delta: float) -> void:
 	if _butter_level <= 0:
 		restart_game()
 		
-	if _cows_beamed_on_left > 0:
+	if len(_cows_beamed_on_left) > 0:
 		$CanvasLayer/LeftDanger.visible = true
 	else:
 		$CanvasLayer/LeftDanger.visible = false
 		
-	if _cows_beamed_on_right > 0:
+	if len(_cows_beamed_on_right) > 0:
 		$CanvasLayer/RightDanger.visible = true
 	else:
 		$CanvasLayer/RightDanger.visible = false
@@ -100,16 +100,20 @@ func _cow_died():
 func _cow_beam_started(cow: Cow):
 	print("Beam started")
 	if cow.global_position.x > player.global_position.x:
-		_cows_beamed_on_right += 1
+		_cows_beamed_on_right.append(cow)
 	if cow.global_position.x < player.global_position.x:
-		_cows_beamed_on_left += 1
+		_cows_beamed_on_left.append(cow)
 
 func _cow_beam_ended(cow: Cow):
 	print("Beam started")
-	if cow.global_position.x > player.global_position.x:
-		_cows_beamed_on_right -= 1
-	if cow.global_position.x < player.global_position.x:
-		_cows_beamed_on_left -= 1
+	var i = _cows_beamed_on_right.find(cow)
+	if i != -1:
+		_cows_beamed_on_right.remove_at(i)
+	else:
+		i = _cows_beamed_on_left.find(cow)
+		assert(i != -1)
+		_cows_beamed_on_left.remove_at(i)
+		
 
 func create_cow(x_pos):
 	#create the cow

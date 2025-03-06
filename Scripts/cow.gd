@@ -31,4 +31,3 @@ func die():
 func get_beamed():
 	is_being_beamed = true
 	SignalBus.beam_started.emit(self)
-

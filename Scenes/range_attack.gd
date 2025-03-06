@@ -29,6 +29,7 @@ func Exit() -> void:
 	
 #what happens during process update in this state
 func Process(_delta : float) -> State:
+	player.velocity.x = 0
 	if not cooldown_timer.is_stopped():
 		return null
 	return idle
