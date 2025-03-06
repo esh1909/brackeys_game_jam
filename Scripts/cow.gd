@@ -4,10 +4,6 @@ var is_being_beamed = false
 @export var BEAM_SPEED = 1000
 @export var GRAVITY = 100
 
-signal on_die
-signal beam_started(cow: Cow)
-signal beam_ended(cow: Cow)
-
 @onready var _anim_state_machine: AnimationNodeStateMachinePlayback= $AnimationTree.get("parameters/playback")
 
 #func _play_idle():
@@ -18,7 +14,7 @@ signal beam_ended(cow: Cow)
 	
 func release():
 	is_being_beamed = false
-	beam_ended.emit(self)
+	SignalBus.beam_ended.emit(self)
 
 func _physics_process(delta: float) -> void:
 	if is_being_beamed and _anim_state_machine.get_current_node() == "scared":
@@ -33,13 +29,13 @@ func _physics_process(delta: float) -> void:
 	
 	
 func die():
-	on_die.emit()
-	beam_ended.emit(self)
+	SignalBus.died.emit(self)
+	SignalBus.beam_ended.emit(self)
 	queue_free()
 
 func get_beamed():
 	#$AnimationPlayer.play("scared")
 	is_being_beamed = true
-	beam_started.emit(self)
+	SignalBus.beam_started.emit(self)
 
 # Called when the node enters the scene tree for the first time.

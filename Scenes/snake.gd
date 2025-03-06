@@ -1,9 +1,7 @@
 extends CharacterBody2D
+class_name  Snake
 
 @onready var animation_player = $AnimationPlayer
-
-signal snake_died
-
 
 func _ready() -> void:
 	animation_player.animation_finished.connect(animation_complete)
@@ -17,4 +15,4 @@ func animation_complete(anim):
 
 func die():
 	animation_player.play("die")
-	snake_died.emit()
+	SignalBus.died.emit(self)

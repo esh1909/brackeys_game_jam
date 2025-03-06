@@ -15,14 +15,13 @@ var can_move = true
 
 signal DirectionChanged(new_direction: Vector2)
 
-signal damaged
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_machine.Initialize(self)
 	
 func take_damage():
-	damaged.emit()
+	SignalBus.damaged.emit(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

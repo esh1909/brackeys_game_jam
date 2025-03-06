@@ -39,11 +39,24 @@ func _get_new_position() -> int:
 func restart_game():
 	get_tree().reload_current_scene()
 	
+func _something_died(body: Node2D):
+	if body is Cow:
+		_cow_died()
+	if body is Snake:
+		_snake_died()
+	if body is Ufo:
+		_ufo_died()
+		
+func _damage_received(body):
+	if body is Player:
+		_player_damaged()
+	
 func _ready() -> void:
-	#var p = GROUND_MIN_X
-	#while p <= GROUND_MAX_X:
-		#
-		#p += 1
+	SignalBus.died.connect(_something_died)
+	SignalBus.beam_started.connect(_cow_beam_started)
+	SignalBus.beam_ended.connect(_cow_beam_ended)
+	SignalBus.collected.connect(_butter_collected)
+	SignalBus.damaged.connect(_damage_received)
 	
 	for i in range(amount_of_cows + amount_of_snakes + amount_of_ufos):
 		positions.append(_get_new_position())
@@ -57,8 +70,6 @@ func _ready() -> void:
 	for i in range(amount_of_snakes):
 		create_snakes(positions.pop_back())
 		
-	$Player.damaged.connect(_player_damaged)
-
 func _player_damaged():
 	_butter_level -= 1
 		
@@ -110,9 +121,6 @@ func create_cow(x_pos):
 	#assign spawn position to cow instance
 	new_cow.position = cow_spawn_location
 	#make cow visible to user
-	new_cow.on_die.connect(_cow_died)
-	new_cow.beam_started.connect(_cow_beam_started)
-	new_cow.beam_ended.connect(_cow_beam_ended)
 	self.add_child(new_cow)
 
 
@@ -138,7 +146,6 @@ func create_ufo(x_pos):
 	new_ufo.position = ufo_spawn_location
 	#make visible to user
 	self.add_child(new_ufo)
-	new_ufo.ufo_died.connect(_ufo_died)
 	
 func create_snakes(x_pos):
 	const SNAKE = preload("res://Scenes/snake.tscn")
@@ -146,7 +153,6 @@ func create_snakes(x_pos):
 	var snake_spawn_location = Vector2(x_pos*MIN_DISTANCE, 24)
 	new_snake.position = snake_spawn_location
 	self.add_child(new_snake)
-	new_snake.snake_died.connect(_snake_died)
 	
 func _butter_collected():
 	_butter_level += 1
@@ -161,7 +167,5 @@ func generate_butter():
 	var discrete_pos_y = randi_range(-20, -70)
 	var butter_spawn_location = Vector2(discrete_pos_x*MIN_DISTANCE, discrete_pos_y)
 	new_butter.position = butter_spawn_location
-	new_butter.collected.connect(_butter_collected)
-	
 	#make visible to user
 	self.add_child(new_butter)
