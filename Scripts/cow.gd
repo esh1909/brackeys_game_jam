@@ -10,8 +10,10 @@ var is_being_beamed = false
 	#$AnimationPlayer.play("idle_cow")
 	#$AnimationPlayer.seek(randf_range(0, 0.3), true)
 	#$AnimationPlayer.speed_scale = randf_range(0.7,2)
+func take_damage():
+	print("Player hit cow")
+	_anim_state_machine.travel("confused")
 
-	
 func release():
 	is_being_beamed = false
 	SignalBus.beam_ended.emit(self)

@@ -12,11 +12,14 @@ func _process(_delta: float) -> void:
 
 
 func TakeDamage(damage : int) -> void:
-	print("TakeDamage " ,damage)
+	print("TakeDamage " ,damage, " ", get_parent())
 	if get_parent().has_method("take_damage"):
+		print("taking damage")
 		get_parent().take_damage()
 	elif get_parent().has_method("die"):
+		print("dying")
 		get_parent().die()
 	else:
+		print("deleting")
 		get_parent().queue_free()
 		

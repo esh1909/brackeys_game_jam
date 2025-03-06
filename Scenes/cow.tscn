@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cl5axqe3rqmd7"]
+[gd_scene load_steps=45 format=3 uid="uid://cl5axqe3rqmd7"]
 
 [ext_resource type="Texture2D" uid="uid://bwwaksho2tvem" path="res://Assets/cow_idle/Cow_Idle-1.png" id="1_rlfa5"]
 [ext_resource type="Script" uid="uid://boq45c2e1pgjo" path="res://Scripts/cow.gd" id="2_e5sas"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cvhkgl53voii7" path="res://Assets/cow_to_scared/Cow_Scared-12.png" id="15_43egv"]
 [ext_resource type="Texture2D" uid="uid://b3xtaxxgftinb" path="res://Assets/cow_to_scared/Cow_Scared-13.png" id="16_hj0an"]
 [ext_resource type="Texture2D" uid="uid://b1mi1ctg8f1jj" path="res://Assets/cow_to_scared/Cow_Scared-14.png" id="17_yahvn"]
+[ext_resource type="Script" uid="uid://dhvow1gvtx446" path="res://Scripts/hitbox.gd" id="23_d3eay"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k4anr"]
 animations = [{
@@ -107,6 +108,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_423x1"]
 radius = 7.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ssyy"]
+animation = &"confused"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnpf5"]
 animation = &"idle_cow"
 
@@ -135,15 +139,24 @@ advance_expression = "is_on_floor() and not is_being_beamed"
 advance_mode = 2
 advance_expression = "!is_being_beamed"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b4xbx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nyuhl"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jx85s"]
-states/Start/position = Vector2(137, 112)
+states/Start/position = Vector2(137, 112.5)
+states/confused/node = SubResource("AnimationNodeAnimation_8ssyy")
+states/confused/position = Vector2(296.32, 75.0812)
 states/idle_cow/node = SubResource("AnimationNodeAnimation_rnpf5")
 states/idle_cow/position = Vector2(303, 222)
 states/idle_to_scared/node = SubResource("AnimationNodeAnimation_qg7rv")
 states/idle_to_scared/position = Vector2(489, 84)
 states/scared/node = SubResource("AnimationNodeAnimation_d3eay")
 states/scared/position = Vector2(647, 211)
-transitions = ["Start", "idle_cow", SubResource("AnimationNodeStateMachineTransition_eesv7"), "idle_cow", "idle_to_scared", SubResource("AnimationNodeStateMachineTransition_8ssyy"), "idle_to_scared", "scared", SubResource("AnimationNodeStateMachineTransition_wsq6f"), "scared", "idle_cow", SubResource("AnimationNodeStateMachineTransition_2gkwg"), "idle_to_scared", "idle_cow", SubResource("AnimationNodeStateMachineTransition_qg7rv")]
+transitions = ["Start", "idle_cow", SubResource("AnimationNodeStateMachineTransition_eesv7"), "idle_cow", "idle_to_scared", SubResource("AnimationNodeStateMachineTransition_8ssyy"), "idle_to_scared", "scared", SubResource("AnimationNodeStateMachineTransition_wsq6f"), "scared", "idle_cow", SubResource("AnimationNodeStateMachineTransition_2gkwg"), "idle_to_scared", "idle_cow", SubResource("AnimationNodeStateMachineTransition_qg7rv"), "idle_cow", "confused", SubResource("AnimationNodeStateMachineTransition_b4xbx"), "confused", "idle_cow", SubResource("AnimationNodeStateMachineTransition_nyuhl")]
+graph_offset = Vector2(-42.48, 30.8999)
 
 [sub_resource type="Animation" id="Animation_sp8eo"]
 length = 0.001
@@ -256,13 +269,44 @@ tracks/1/keys = {
 "values": [0, 4]
 }
 
+[sub_resource type="Animation" id="Animation_d3eay"]
+resource_name = "confused"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle_to_scared"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [13, 1, 6, 1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f37q3"]
 _data = {
 &"RESET": SubResource("Animation_sp8eo"),
+&"confused": SubResource("Animation_d3eay"),
 &"idle_cow": SubResource("Animation_800vu"),
 &"idle_to_scared": SubResource("Animation_v1jvh"),
 &"scared": SubResource("Animation_sa3us")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ssyy"]
+size = Vector2(19, 18)
 
 [node name="cow" type="CharacterBody2D"]
 collision_layer = 2
@@ -292,3 +336,13 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_f37q3")
 }
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("23_d3eay")
+metadata/_custom_type_script = "uid://dhvow1gvtx446"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1.5, 3)
+shape = SubResource("RectangleShape2D_8ssyy")
