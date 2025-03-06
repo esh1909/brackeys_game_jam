@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 		restart_game()
 	_butter_level -= delta*butter_loss_rate
 	_butter_level = clamp(_butter_level, 0, MAX_BUTTER)
-	score.size.x = _butter_level * BUTTER_TEXTURE_SIZE
+	score.size.x = lerp(score.size.x, _butter_level * BUTTER_TEXTURE_SIZE, 0.2)
 	if _butter_level <= 0:
 		restart_game()
 		
@@ -154,7 +154,7 @@ func create_snakes(x_pos):
 	new_snake.position = snake_spawn_location
 	self.add_child(new_snake)
 	
-func _butter_collected():
+func _butter_collected(node: Node):
 	_butter_level += 1
 	#score.text = "Butter: " + str(_butter_level)
 
