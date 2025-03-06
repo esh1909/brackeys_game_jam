@@ -110,10 +110,10 @@ func create_cow(x_pos):
 	#assign spawn position to cow instance
 	new_cow.position = cow_spawn_location
 	#make cow visible to user
-	self.add_child(new_cow)
 	new_cow.on_die.connect(_cow_died)
 	new_cow.beam_started.connect(_cow_beam_started)
 	new_cow.beam_ended.connect(_cow_beam_ended)
+	self.add_child(new_cow)
 
 
 func _on_butter_spawn_timeout() -> void:
