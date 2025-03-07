@@ -1,9 +1,6 @@
 extends Node2D
 
-@export var amount_of_cows = 4
 @export var amount_of_butter = 2
-@export var amount_of_ufos = 3
-@export var amount_of_snakes = 5
 @export var butter_loss_rate = 0.1
 @export var starting_butter = 3
 @export var MAX_BUTTER = 10
@@ -17,10 +14,6 @@ const GROUND_MIN_X = -900
 const GROUND_MAX_X = 900
 const BUTTER_TEXTURE_SIZE = 40
 
-var _current_cows_in_game = 0
-var _current_butter_in_game = 0
-var _current_ufos_in_game = 0
-var _current_snakes_in_game = 0
 @onready var player = $Player
 @onready var _butter_level:float = starting_butter
 
@@ -59,18 +52,6 @@ func _ready() -> void:
 	SignalBus.collected.connect(_butter_collected)
 	SignalBus.damaged.connect(_damage_received)
 	
-	for i in range(amount_of_cows + amount_of_snakes + amount_of_ufos):
-		positions.append(_get_new_position())
-	
-	for i in range(amount_of_cows):
-		create_cow(positions.pop_back())
-
-	for i in range(amount_of_ufos):
-		create_ufo(positions.pop_back())
-	
-	for i in range(amount_of_snakes):
-		create_snakes(positions.pop_back())
-		
 func _player_damaged():
 	_butter_level -= 1
 		
@@ -96,7 +77,7 @@ func _process(delta: float) -> void:
 func _cow_died():
 	print("a cow died")
 	_butter_level -= 2
-	create_cow(randi_range(SPAWN_MIN_X, SPAWN_MAX_X))
+	$Cows/Spawner.spawn()
 
 func _cow_beam_started(cow: Cow):
 	print("Beam started")
@@ -116,49 +97,17 @@ func _cow_beam_ended(cow: Cow):
 		_cows_beamed_on_left.remove_at(i)
 		
 
-func create_cow(x_pos):
-	#create the cow
-	const COW = preload("res://Scenes/cow.tscn")   
-	var new_cow = COW.instantiate()
-	#give it a random spawn location for x and y axis
-	var cow_spawn_location = Vector2(x_pos*MIN_DISTANCE, 0)
-	print(cow_spawn_location)
-	#assign spawn position to cow instance
-	new_cow.position = cow_spawn_location
-	#make cow visible to user
-	self.add_child(new_cow)
-
-
 func _on_butter_spawn_timeout() -> void:
 	for i in range(amount_of_butter):	
 		generate_butter()
 		
 func _ufo_died():
 	_butter_level += 2
-	create_ufo(randi_range(SPAWN_MIN_X, SPAWN_MAX_X))
-	
-func _snake_died():
-	create_snakes(randi_range(SPAWN_MIN_X, SPAWN_MAX_X))
+	$Ufos/Spawner.spawn()
 
-func create_ufo(x_pos):
-	#create the ufo
-	const UFO = preload("res://Scenes/ufo.tscn")
-	var new_ufo = UFO.instantiate() 
-	#give it a random spawn location for x and y axis
-	var ufo_spawn_location = Vector2(x_pos*MIN_DISTANCE, -100)
-	
-	#assign spawn position to ufo instance
-	new_ufo.position = ufo_spawn_location
-	#make visible to user
-	self.add_child(new_ufo)
-	
-func create_snakes(x_pos):
-	const SNAKE = preload("res://Scenes/snake.tscn")
-	var new_snake = SNAKE.instantiate()
-	var snake_spawn_location = Vector2(x_pos*MIN_DISTANCE, 24)
-	new_snake.position = snake_spawn_location
-	self.add_child(new_snake)
-	
+func _snake_died():
+	$Snakes/Spawner.spawn()
+
 func _butter_collected(node: Node):
 	_butter_level += 1
 

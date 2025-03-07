@@ -178,9 +178,6 @@ sources/0 = SubResource("TileSetAtlasSource_pxt65")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uh4ps")
-amount_of_cows = 0
-amount_of_ufos = 0
-amount_of_snakes = 0
 
 [node name="Player" parent="." instance=ExtResource("1_6pg4x")]
 z_index = 5
