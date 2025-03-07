@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1n7sdapd5s0r"]
+
+[ext_resource type="Script" uid="uid://r6dnuxu1othi" path="res://Recipes/counter.gd" id="1_ux88a"]
+
+[node name="Counter" type="Node"]
+script = ExtResource("1_ux88a")

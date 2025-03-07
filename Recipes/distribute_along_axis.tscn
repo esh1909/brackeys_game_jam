@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv8ly6s8q8wke"]
+
+[ext_resource type="Script" uid="uid://cvq5tt0mvx6wk" path="res://Recipes/distribute_along_axis.gd" id="1_xxh36"]
+
+[node name="DistributeAlongAxis" type="Node"]
+script = ExtResource("1_xxh36")

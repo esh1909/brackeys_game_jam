@@ -40,6 +40,7 @@ func restart_game():
 	get_tree().reload_current_scene()
 	
 func _something_died(body: Node2D):
+	print("died", body)
 	if body is Cow:
 		_cow_died()
 	if body is Snake:

@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 	pass
 
 func AreaEntered(a : Area2D) -> void:
-	print("hurtbox ", get_parent())
+	print("hurtbox ", get_parent(), get_parent().get_class())
 	if a is HitBox:
 		if self.get_parent() != a.get_parent():
 			a.TakeDamage(damage)

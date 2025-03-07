@@ -185,6 +185,33 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_d3eay"]
+resource_name = "confused"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle_to_scared"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [13, 1, 6, 1]
+}
+
 [sub_resource type="Animation" id="Animation_800vu"]
 resource_name = "idle_cow"
 loop_mode = 2
@@ -269,33 +296,6 @@ tracks/1/keys = {
 "values": [0, 4]
 }
 
-[sub_resource type="Animation" id="Animation_d3eay"]
-resource_name = "confused"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle_to_scared"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [13, 1, 6, 1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f37q3"]
 _data = {
 &"RESET": SubResource("Animation_sp8eo"),
@@ -317,7 +317,7 @@ script = ExtResource("2_e5sas")
 position = Vector2(2, 5)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
+z_index = 3
 sprite_frames = SubResource("SpriteFrames_k4anr")
 animation = &"scared"
 
