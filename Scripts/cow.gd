@@ -8,7 +8,8 @@ var is_being_beamed = false
 
 func take_damage():
 	print("Player hit cow")
-	_anim_state_machine.travel("confused")
+	if !is_being_beamed:
+		_anim_state_machine.travel("confused")
 
 func release():
 	is_being_beamed = false
