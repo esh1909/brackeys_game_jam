@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uwbuf7ka1von"]
+
+[ext_resource type="Script" uid="uid://blag6ghaeg1vc" path="res://Recipes/distribute.gd" id="1_u124b"]
+
+[node name="Distribute" type="Node"]
+script = ExtResource("1_u124b")

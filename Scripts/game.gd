@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var amount_of_butter = 2
 @export var butter_loss_rate = 0.1
 @export var starting_butter = 3
 @export var MAX_BUTTER = 10
@@ -95,12 +94,7 @@ func _cow_beam_ended(cow: Cow):
 		i = _cows_beamed_on_left.find(cow)
 		assert(i != -1)
 		_cows_beamed_on_left.remove_at(i)
-		
 
-func _on_butter_spawn_timeout() -> void:
-	for i in range(amount_of_butter):	
-		generate_butter()
-		
 func _ufo_died():
 	_butter_level += 2
 	$Ufos/Spawner.spawn()
@@ -110,15 +104,3 @@ func _snake_died():
 
 func _butter_collected(node: Node):
 	_butter_level += 1
-
-func generate_butter():
-	#create the butter
-	const BUTTER =  preload("res://Scenes/butter.tscn")
-	var new_butter = BUTTER.instantiate() 
-	#give it a random spawn location for x and y axis
-	var discrete_pos_x = randi_range(-10, 10)
-	var discrete_pos_y = randi_range(-20, -70)
-	var butter_spawn_location = Vector2(discrete_pos_x*MIN_DISTANCE, discrete_pos_y)
-	new_butter.position = butter_spawn_location
-	#make visible to user
-	self.add_child(new_butter)

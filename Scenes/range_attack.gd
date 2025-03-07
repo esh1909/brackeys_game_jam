@@ -8,6 +8,9 @@ var attacking : bool = false
 
 @onready var cooldown_timer = $Cooldown
 
+func _ready():
+	cooldown_timer.timeout.connect(timer_end)
+	
 #What happens when player enters this state
 func Enter() -> void:
 	# fire projectile
@@ -16,7 +19,6 @@ func Enter() -> void:
 	projectile.position = player.position
 	get_tree().root.add_child(projectile)
 	cooldown_timer.start()
-	cooldown_timer.timeout.connect(timer_end)
 	$FX.play()
 	pass
 

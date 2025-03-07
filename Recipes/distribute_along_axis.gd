@@ -1,14 +1,10 @@
-extends Node
-enum axes {x_axis, y_axis}
+extends DistributeBase
 
 @export var fixed_axis: axes
 @export var fixed_axis_value: float
 @export var min_value: float
 @export var max_value: float
 @export var min_distance: float = 0.0
-@export var parent: Node = null
-
-var _previous_distribution_positions = []
 
 func _ready():
 	assert(min_value < max_value)
@@ -29,15 +25,5 @@ func _get_new_position() -> Vector2:
 				_is_viable = false
 				break
 		if _is_viable:
-			_previous_distribution_positions.append(new_position)
 			return new_position
 	return Vector2()
-
-func distribute(node: Node2D):
-	if parent == null:
-		parent = get_parent()
-	var new_position = _get_new_position()
-	node.position = new_position - parent.position
-	print("distribute ", node.global_position)
-	# Deffered Needed since first frame is still setting things up
-	parent.add_child.call_deferred(node)
