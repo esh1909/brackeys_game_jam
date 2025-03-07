@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://d1hdth13sso66"]
+[gd_scene load_steps=13 format=4 uid="uid://d1hdth13sso66"]
 
 [ext_resource type="PackedScene" uid="uid://dteeaorlt0ipr" path="res://Scenes/player.tscn" id="1_6pg4x"]
 [ext_resource type="Script" uid="uid://b5fa0ffdr6htf" path="res://Scripts/game.gd" id="1_uh4ps"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bv8ly6s8q8wke" path="res://Recipes/distribute_along_axis.tscn" id="6_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://u62xoucc5f3g" path="res://Recipes/spawner.tscn..tscn" id="7_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://cl5axqe3rqmd7" path="res://Scenes/cow.tscn" id="8_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://cbx1o8g33arqy" path="res://Scenes/snake.tscn" id="9_h4fw4"]
+[ext_resource type="PackedScene" uid="uid://dfgix31e85o3n" path="res://Scenes/ufo.tscn" id="10_ldgsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pxt65"]
 texture = ExtResource("2_ccdea")
@@ -177,6 +179,8 @@ sources/0 = SubResource("TileSetAtlasSource_pxt65")
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uh4ps")
 amount_of_cows = 0
+amount_of_ufos = 0
+amount_of_snakes = 0
 
 [node name="Player" parent="." instance=ExtResource("1_6pg4x")]
 z_index = 5
@@ -254,13 +258,49 @@ max_count = 4
 fixed_axis = 1
 fixed_axis_value = 20.0
 min_value = -600.0
-max_value = 100.0
+max_value = 600.0
 min_distance = 100.0
 
 [node name="Spawner" parent="Cows" instance=ExtResource("7_ldgsr")]
 scn = ExtResource("8_o5yvi")
 
+[node name="Snakes" type="Node2D" parent="."]
+
+[node name="Counter" parent="Snakes" instance=ExtResource("5_v158k")]
+max_count = 4
+
+[node name="DistributeAlongAxis" parent="Snakes" instance=ExtResource("6_h4fw4")]
+fixed_axis = 1
+fixed_axis_value = 22.0
+min_value = -600.0
+max_value = 600.0
+min_distance = 100.0
+
+[node name="Spawner" parent="Snakes" instance=ExtResource("7_ldgsr")]
+scn = ExtResource("9_h4fw4")
+
+[node name="Ufos" type="Node2D" parent="."]
+
+[node name="Counter" parent="Ufos" instance=ExtResource("5_v158k")]
+max_count = 4
+
+[node name="DistributeAlongAxis" parent="Ufos" instance=ExtResource("6_h4fw4")]
+fixed_axis = 1
+fixed_axis_value = -100.0
+min_value = -600.0
+max_value = 600.0
+min_distance = 100.0
+
+[node name="Spawner" parent="Ufos" instance=ExtResource("7_ldgsr")]
+scn = ExtResource("10_ldgsr")
+
 [connection signal="timeout" from="ButterSpawn" to="." method="_on_butter_spawn_timeout"]
 [connection signal="counted" from="Cows/Counter" to="Cows/Spawner" method="spawn"]
 [connection signal="ready" from="Cows/Counter" to="Cows/Counter" method="count"]
 [connection signal="spawned" from="Cows/Spawner" to="Cows/DistributeAlongAxis" method="distribute"]
+[connection signal="counted" from="Snakes/Counter" to="Snakes/Spawner" method="spawn"]
+[connection signal="ready" from="Snakes/Counter" to="Snakes/Counter" method="count"]
+[connection signal="spawned" from="Snakes/Spawner" to="Snakes/DistributeAlongAxis" method="distribute"]
+[connection signal="counted" from="Ufos/Counter" to="Ufos/Spawner" method="spawn"]
+[connection signal="ready" from="Ufos/Counter" to="Ufos/Counter" method="count"]
+[connection signal="spawned" from="Ufos/Spawner" to="Ufos/DistributeAlongAxis" method="distribute"]

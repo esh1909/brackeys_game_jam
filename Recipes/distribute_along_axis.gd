@@ -3,12 +3,16 @@ enum axes {x_axis, y_axis}
 
 @export var fixed_axis: axes
 @export var fixed_axis_value: float
-@export var parent: Node = null
 @export var min_value: float
 @export var max_value: float
 @export var min_distance: float = 0.0
+@export var parent: Node = null
 
 var _previous_distribution_positions = []
+
+func _ready():
+	assert(min_value < max_value)
+	assert((max_value - min_value) > min_distance)
 
 func _get_new_position() -> Vector2:
 	while true:
