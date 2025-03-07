@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c1n7sdapd5s0r" path="res://Recipes/counter.tscn" id="5_v158k"]
 [ext_resource type="PackedScene" uid="uid://bv8ly6s8q8wke" path="res://Recipes/distribute_along_axis.tscn" id="6_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://u62xoucc5f3g" path="res://Recipes/spawner.tscn..tscn" id="7_ldgsr"]
-[ext_resource type="PackedScene" uid="uid://cl5axqe3rqmd7" path="res://Scenes/cow.tscn" id="8_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://c3i53qybgdv0a" path="res://Scenes/cow.tscn" id="8_o5yvi"]
 [ext_resource type="PackedScene" uid="uid://cbx1o8g33arqy" path="res://Scenes/snake.tscn" id="9_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://dfgix31e85o3n" path="res://Scenes/ufo.tscn" id="10_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://uwbuf7ka1von" path="res://Recipes/distribute.tscn" id="11_rku1e"]
@@ -244,35 +244,26 @@ grow_horizontal = 0
 grow_vertical = 2
 color = Color(1, 0, 0, 0.721569)
 
-[node name="Cows" type="Node2D" parent="."]
+[node name="Cows and snakes" type="Node2D" parent="."]
 
-[node name="Counter" parent="Cows" instance=ExtResource("5_v158k")]
+[node name="SnakeSpawner" parent="Cows and snakes" instance=ExtResource("7_ldgsr")]
+scn = ExtResource("9_h4fw4")
+
+[node name="CowCounter" parent="Cows and snakes" instance=ExtResource("5_v158k")]
 max_count = 4
 
-[node name="DistributeAlongAxis" parent="Cows" instance=ExtResource("6_h4fw4")]
+[node name="DistributeAlongAxis" parent="Cows and snakes" instance=ExtResource("6_h4fw4")]
 fixed_axis = 1
 fixed_axis_value = 20.0
 min_value = -600.0
 max_value = 600.0
 min_distance = 100.0
 
-[node name="Spawner" parent="Cows" instance=ExtResource("7_ldgsr")]
+[node name="CowSpawner" parent="Cows and snakes" instance=ExtResource("7_ldgsr")]
 scn = ExtResource("8_o5yvi")
 
-[node name="Snakes" type="Node2D" parent="."]
-
-[node name="Counter" parent="Snakes" instance=ExtResource("5_v158k")]
+[node name="SnakeCounter" parent="Cows and snakes" instance=ExtResource("5_v158k")]
 max_count = 4
-
-[node name="DistributeAlongAxis" parent="Snakes" instance=ExtResource("6_h4fw4")]
-fixed_axis = 1
-fixed_axis_value = 22.0
-min_value = -600.0
-max_value = 600.0
-min_distance = 100.0
-
-[node name="Spawner" parent="Snakes" instance=ExtResource("7_ldgsr")]
-scn = ExtResource("9_h4fw4")
 
 [node name="Ufos" type="Node2D" parent="."]
 
@@ -303,12 +294,12 @@ max_count = 4
 [node name="Spawner" parent="Butter" instance=ExtResource("7_ldgsr")]
 scn = ExtResource("12_rfjv2")
 
-[connection signal="counted" from="Cows/Counter" to="Cows/Spawner" method="spawn"]
-[connection signal="ready" from="Cows/Counter" to="Cows/Counter" method="count"]
-[connection signal="spawned" from="Cows/Spawner" to="Cows/DistributeAlongAxis" method="distribute"]
-[connection signal="counted" from="Snakes/Counter" to="Snakes/Spawner" method="spawn"]
-[connection signal="ready" from="Snakes/Counter" to="Snakes/Counter" method="count"]
-[connection signal="spawned" from="Snakes/Spawner" to="Snakes/DistributeAlongAxis" method="distribute"]
+[connection signal="spawned" from="Cows and snakes/SnakeSpawner" to="Cows and snakes/DistributeAlongAxis" method="distribute"]
+[connection signal="counted" from="Cows and snakes/CowCounter" to="Cows and snakes/CowSpawner" method="spawn"]
+[connection signal="ready" from="Cows and snakes/CowCounter" to="Cows and snakes/CowCounter" method="count"]
+[connection signal="spawned" from="Cows and snakes/CowSpawner" to="Cows and snakes/DistributeAlongAxis" method="distribute"]
+[connection signal="counted" from="Cows and snakes/SnakeCounter" to="Cows and snakes/SnakeSpawner" method="spawn"]
+[connection signal="ready" from="Cows and snakes/SnakeCounter" to="Cows and snakes/SnakeCounter" method="count"]
 [connection signal="counted" from="Ufos/Counter" to="Ufos/Spawner" method="spawn"]
 [connection signal="ready" from="Ufos/Counter" to="Ufos/Counter" method="count"]
 [connection signal="spawned" from="Ufos/Spawner" to="Ufos/DistributeAlongAxis" method="distribute"]

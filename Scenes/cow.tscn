@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cl5axqe3rqmd7"]
+[gd_scene load_steps=45 format=3 uid="uid://c3i53qybgdv0a"]
 
 [ext_resource type="Texture2D" uid="uid://bwwaksho2tvem" path="res://Assets/cow_idle/Cow_Idle-1.png" id="1_rlfa5"]
 [ext_resource type="Script" uid="uid://boq45c2e1pgjo" path="res://Scripts/cow.gd" id="2_e5sas"]
@@ -109,7 +109,7 @@ animations = [{
 radius = 7.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ssyy"]
-animation = &"confused"
+animation = &"scared_to_idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnpf5"]
 animation = &"idle_cow"

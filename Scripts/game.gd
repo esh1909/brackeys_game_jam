@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 func _cow_died():
 	print("a cow died")
 	_butter_level -= 2
-	$Cows/Spawner.spawn()
+	$"Cows and snakes/CowSpawner".spawn()
 
 func _cow_beam_started(cow: Cow):
 	print("Beam started")
@@ -100,7 +100,7 @@ func _ufo_died():
 	$Ufos/Spawner.spawn()
 
 func _snake_died():
-	$Snakes/Spawner.spawn()
+	$"Cows and snakes/SnakeSpawner".spawn()
 
 func _butter_collected(node: Node):
 	_butter_level += 1
