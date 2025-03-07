@@ -15,6 +15,7 @@ func release():
 	SignalBus.beam_ended.emit(self)
 
 func _physics_process(delta: float) -> void:
+	print(_anim_state_machine.get_current_node())
 	if is_being_beamed and _anim_state_machine.get_current_node() == "scared":
 		velocity = Vector2.UP * BEAM_SPEED * delta
 	else:

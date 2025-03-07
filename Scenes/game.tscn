@@ -250,7 +250,7 @@ color = Color(1, 0, 0, 0.721569)
 scn = ExtResource("9_h4fw4")
 
 [node name="CowCounter" parent="Cows and snakes" instance=ExtResource("5_v158k")]
-max_count = 4
+max_count = 1
 
 [node name="DistributeAlongAxis" parent="Cows and snakes" instance=ExtResource("6_h4fw4")]
 fixed_axis = 1
