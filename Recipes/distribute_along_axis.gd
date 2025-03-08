@@ -11,7 +11,8 @@ func _ready():
 	assert((max_value - min_value) > min_distance)
 
 func _get_new_position() -> Vector2:
-	while true:
+	var max_tries = 200
+	for i in range(max_tries):
 		var new_position = Vector2()
 		if fixed_axis == axes.x_axis:
 			new_position.x = fixed_axis_value
@@ -26,4 +27,6 @@ func _get_new_position() -> Vector2:
 				break
 		if _is_viable:
 			return new_position
+		print("Trying ", i)
+	assert(false)
 	return Vector2()

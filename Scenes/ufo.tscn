@@ -30,7 +30,7 @@ shape = SubResource("RectangleShape2D_vh7w3")
 [node name="Beam" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.862745)
 position = Vector2(4, 3)
-scale = Vector2(-1, 4)
+scale = Vector2(-1, 1e-05)
 texture = ExtResource("2_5g552")
 offset = Vector2(0, 15.54)
 
